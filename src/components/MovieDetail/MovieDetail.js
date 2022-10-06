@@ -7,7 +7,7 @@ export default function MovieDetail() {
     console.log(param);
   return (
     <div>
-      MovieDetail{param.imdbId}
+      MovieDetail{param.imdbID}
     </div>
   )
 }

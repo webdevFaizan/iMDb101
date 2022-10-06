@@ -8,7 +8,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',  //This is the naming convention for identifying the async action creator, movies comes from the createSlice method and /fetchAsyncMovies is the name of the current function.
     async ()=>{     //The second parameter is the payload creator async function.
-        const searchTerm = 'Dark Knight';
+        const searchTerm = 'Batman';
         const type = 'movie';
         const response = await movieApi
         .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
