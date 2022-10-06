@@ -9,7 +9,7 @@ export default function Home(){
 
   const dispatch = useDispatch();
 
-  // In this useEffect I was trying to use the fetch api to make a http request.
+  //Method 1 - In this useEffect I was trying to use the fetch api to make a http request.
   // useEffect(()=>{
   //   const fetchMovies= async()=>{
   //     const searchTerm ='Batman';
@@ -22,7 +22,7 @@ export default function Home(){
   //   fetchMovies();
   // },[])
 
-  //Making the call using axios -
+  //Method 1 - Making the call using axios -
   useEffect(() => {
     const fetchMovies = async() => {
       const searchTerm = 'Batman';
@@ -39,6 +39,7 @@ export default function Home(){
       dispatch(addMovies(response.data));
     }
     fetchMovies();
+    //eslint-disable-next-line
   }, [])
 
   return (

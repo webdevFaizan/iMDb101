@@ -1,0 +1,28 @@
+@import "../../common/colors.scss";
+
+.movie-list,
+.show-list {
+  margin: 20px 0px;
+  h2 {
+    color: $font-secondary;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+}
+
+.movie-wrapper{
+    border: '2px solid green';
+}
+
+.movie-container {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+//   grid-gap: 15px;
+    display: flex;
+    border: '2px solid red';
+    // margin: 10;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
