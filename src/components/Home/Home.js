@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import MovieListing from '../MovieListing/MovieListing';
-import { APIkey } from '../../common/apis/MovieApiKey';
-import movieApi from '../../common/apis/movieApi';
+
 import { useDispatch } from 'react-redux';
-import { addMovies } from '../../features/movies/movieSlice';
+import { fetchAsyncMovies } from '../../features/movies/movieSlice';
 
 export default function Home(){
 
@@ -22,25 +21,30 @@ export default function Home(){
   //   fetchMovies();
   // },[])
 
-  //Method 1 - Making the call using axios -
+  //Method 2 - Making the call using axios -
+  // useEffect(() => {
+  //   const fetchMovies = async() => {
+  //     const searchTerm = 'Batman';
+  //     const type = 'movie';
+
+  //     // Method 1 of using the axios get call, and it is similar to the Method 2 of axios call -
+  //     const response = await movieApi
+  //       .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
+  //       .catch((error)=>{console.log(error)});      
+
+  //     // Method 2 -
+  //     // const response = await axios.get(`https://www.omdbapi.com?apikey=${APIkey}&type=${type}&s=${searchTerm}`);
+  //     // console.log(response.data);
+  //     dispatch(addMovies(response.data));
+  //   }
+  //   fetchMovies();
+  //   //eslint-disable-next-line
+  // }, [])
+
+// Method 3 - Calling the useEffect() method using asyncThunk
   useEffect(() => {
-    const fetchMovies = async() => {
-      const searchTerm = 'Batman';
-      const type = 'movie';
-
-      // Method 1 of using the axios get call, and it is similar to the Method 2 of axios call -
-      const response = await movieApi
-        .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
-        .catch((error)=>{console.log(error)});      
-
-      // Method 2 -
-      // const response = await axios.get(`https://www.omdbapi.com?apikey=${APIkey}&type=${type}&s=${searchTerm}`);
-      // console.log(response.data);
-      dispatch(addMovies(response.data));
-    }
-    fetchMovies();
-    //eslint-disable-next-line
-  }, [])
+    dispatch(fetchAsyncMovies());
+  }, [dispatch])
 
   return (
     <div>
