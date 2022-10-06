@@ -29,10 +29,29 @@ export const fetchAsyncShows = createAsyncThunk(
     }
 )
 
+export const fetchAsyncMovieOrShowDetail = createAsyncThunk(
+    'movies/fetchAsyncMovieOrShowDetail',
+    async (id) => {        
+        const type = 'movie';
+        const response = await movieApi.get(`?apiKey=${APIkey}&type=${type}&i=${id}&Plot=full`);
+        console.log(response.data);
+        return response.data;
+    }
+)
+
+
+// IMPORTANT : Note, we do not want to remove the movies asynchronously, not does it should take any time, this is why we are moving this  async action creator  to synchronous action creator. 
+// export const removeSelectedMovieOrShow = createAsyncThunk(
+//     'movies/removeSelectedMovieOrShow',
+//     async () => {
+//         return {};
+//     }
+// )
 
 const initialState = {
     movies : {},
-    series : {}
+    series : {},
+    selectMovieOrShow: {},
 }
 
 const movieSlice = createSlice({
@@ -40,10 +59,14 @@ const movieSlice = createSlice({
     initialState,
     reducers : {
         // This addMovies is an action creator that will be dispathced to the reducer which will actually alter the state of the store.
-        addMovies : (state,{payload}) =>{
+        addMovies : (state,{payload}) =>{           //IMPORTANT : Initially when we created this app, this addMovies was a part of synchornous action-creator, but later we changed to async action creator, so this being here is kind of useless.
             state.movies = payload
             // IMPORTANT : Here there is a difference between the redux and the redux toolkit, in the redux the reudcers could not directly assign the values to the state object as it was immutable, but in redux toolkit the values of the state is mutable, which means we could easily replace the values inside the state. In the reudx toolkit, it uses an internal library to maintain the mutability. In the old redux way we had to destructure the old state object and add the new payload to the object before returning.
+        },
+        removeSelectedMovieOrShow : (state)=>{
+            state.selectMovieOrShow={};
         }
+
     },
     // extraReducers : {}
     // There is an another optional parameter in here, known as the extra reducer, we can read the docs or visit the dipesh malvia video to understand about the extra reudcer. In our project we do not require the use of extra reducer.
@@ -68,10 +91,15 @@ const movieSlice = createSlice({
         [fetchAsyncShows.rejected] : ()=>{
             console.log('rejected');
         },
+        [fetchAsyncMovieOrShowDetail.fulfilled] : (state, {payload})=>{
+            console.log("Fulfilled");
+            return {...state, selectMovieOrShow : payload};
+        }
     }
 });
 
-export const {addMovies} = movieSlice.actions;
+export const {addMovies,removeSelectedMovieOrShow} = movieSlice.actions;
 export const getAllMovies = (state) =>{return state.movies.movies};
 export const getAllSeries = (state) =>{return state.movies.series};
+export const getSelectedMovieOrShow = (state) => state.movies.selectMovieOrShow;
 export default movieSlice.reducer;
