@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import MovieListing from '../MovieListing/MovieListing';
 
 import { useDispatch } from 'react-redux';
-import { fetchAsyncMovies } from '../../features/movies/movieSlice';
+import { fetchAsyncMovies,fetchAsyncShows } from '../../features/movies/movieSlice';
 
 export default function Home(){
 
@@ -35,7 +35,7 @@ export default function Home(){
   //     // Method 2 -
   //     // const response = await axios.get(`https://www.omdbapi.com?apikey=${APIkey}&type=${type}&s=${searchTerm}`);
   //     // console.log(response.data);
-  //     dispatch(addMovies(response.data));
+  //     dispatch(addMovies(response.data));    //IMPORTANT : This method 2 is taking the fetch call asynchronously but it sending the data after that in a synchronous manner, in the method 3, we are going to use the redux-thunk, which will not dispatch the method synchronously, but instead it will dispath first, then in the action creator, the async function will be called which means action-creator is being called asynchronously.
   //   }
   //   fetchMovies();
   //   //eslint-disable-next-line
@@ -43,7 +43,8 @@ export default function Home(){
 
 // Method 3 - Calling the useEffect() method using asyncThunk
   useEffect(() => {
-    dispatch(fetchAsyncMovies());
+    dispatch(fetchAsyncMovies());   //Asynchronous action-creator will call the data asynchronously.
+    dispatch(fetchAsyncShows());   //Asynchronous action-creator will call the data asynchronously.
   }, [dispatch])
 
   return (
