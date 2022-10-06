@@ -13,11 +13,14 @@ function App() {
       <Router>
         <div className='app'>
             <Header/>
-            <Routes>
-              <Route exact path='/' element={<Home/>}/>
-              <Route exact path='/movie/:imdbId' element={<MovieDetail/>}/>
-              <Route element={<PageNotFound/>}/>
-            </Routes>
+            <div className="container">
+              <Routes>
+                <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/movie/:imdbId' element={<MovieDetail/>}/>
+                <Route path='*' element={<PageNotFound/>}/>
+                {/* This is the wild card route, when a route is being accessed that does not consist of the route mentioned here, this page must be rendered. */}
+              </Routes>
+            </div>
             <Footer/>
         </div>
       </Router>
