@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useParams } from 'react-router';
 import { useParams } from 'react-router-dom';
+// useParams is present in both react-router and react-router-dom
 import {fetchAsyncMovieOrShowDetail,getSelectedMovieOrShow,removeSelectedMovieOrShow}  from '../../features/movies/movieSlice'
 import './MovieDetail.scss'
 
@@ -13,11 +14,12 @@ export default function MovieDetail() {
     useEffect(()=>{
       dispatch(fetchAsyncMovieOrShowDetail(imdbID));
       return ()=>{
-        dispatch(removeSelectedMovieOrShow());
+        dispatch(removeSelectedMovieOrShow());    //This method do not need to be async, if we decide it to be async then we cannot be sure when the details will be fetched and when the details will be properly removed from the store, this is why this dispatch has to be synchronous.
       }
-    },[imdbID])
+    },[dispatch,imdbID])
     return (
       <div className="movie-section">
+        {/* This is the common way of showing the Loading section until the state changes and the data is loaded.*/}
         {Object.keys(data).length === 0 ? (
           <div>...Loading</div>
         ) : (
