@@ -1,1 +1,1 @@
-export default APIkey = '26903d56';
+export const  APIkey = '26903d56';
