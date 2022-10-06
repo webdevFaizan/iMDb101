@@ -2,9 +2,12 @@ import React, { useEffect } from 'react'
 import MovieListing from '../MovieListing/MovieListing';
 import { APIkey } from '../../common/apis/MovieApiKey';
 import movieApi from '../../common/apis/movieApi';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addMovies } from '../../features/movies/movieSlice';
 
-export default function Home() {
+export default function Home(){
+
+  const dispatch = useDispatch();
 
   // In this useEffect I was trying to use the fetch api to make a http request.
   // useEffect(()=>{
@@ -28,17 +31,15 @@ export default function Home() {
       // Method 1 of using the axios get call, and it is similar to the Method 2 of axios call -
       const response = await movieApi
         .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
-        .catch((error)=>{console.log(error)});
-      const data = await response.json();
+        .catch((error)=>{console.log(error)});      
 
       // Method 2 -
       // const response = await axios.get(`https://www.omdbapi.com?apikey=${APIkey}&type=${type}&s=${searchTerm}`);
-
-      console.log(response.data);
+      // console.log(response.data);
+      dispatch(addMovies(response.data));
     }
     fetchMovies();
   }, [])
-
 
   return (
     <div>
