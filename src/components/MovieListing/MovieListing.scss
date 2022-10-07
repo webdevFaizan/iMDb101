@@ -19,8 +19,12 @@
 //   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 //   grid-gap: 15px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    // flex-direction: row;
+    // flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.movie-inner-container {
+  max-width: 1200px;
 }
