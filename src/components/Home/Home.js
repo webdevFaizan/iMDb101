@@ -45,7 +45,7 @@ export default function Home(props){
   useEffect(() => {
     var searchTerm = props.term;
     if(!searchTerm){
-      searchTerm = 'Harry'
+      searchTerm = 'Batman'
     }
     // console.log(props.term)
     //IMPORTANT : The search term is being defined as props.term which simply means that if I click on the back button in the navation bar of the browser, when the website comes from the movieDetail page to the home page, the term will still remain the same as old one, which means if I went to the batman movie detail page, and then searched for harry potter, now if I click back button, I will go to harry not batman page. This is becasue the global state of term variable is still the same as 'harry' no matter how many times I click back. This is why I think the navigation should not be taken in such a manner using react, it should have been done by some other way.

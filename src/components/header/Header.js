@@ -38,7 +38,8 @@ const Header = (props) => {
     clearTimeout(id);
     setID(setTimeout(()=>{
       termChangeHandler(t);
-    },800));    
+    },800));
+    //eslint-disable-next-line 
   },[t])
   // IMPORTANT : This value t, is now being live tracked, and thus the value is being passed to the useEffect hook live, which in turn changes the original global variable 'term' on time, this is very important so that the api call is made using the correct search term. Api search for 'ba' instead of 'bat' will give bad user experience.
 
