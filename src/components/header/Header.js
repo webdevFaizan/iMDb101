@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchAsyncMovies, fetchAsyncShows } from "../../features/movies/movieSlice";
 import user from "../../images/user.png";
 import "./Header.scss";
@@ -9,6 +9,7 @@ const Header = () => {
 
   const [term,setTerm] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOnChange = (e)=>{
     // console.log(e);
@@ -21,6 +22,7 @@ const Header = () => {
     console.log(term);
     dispatch(fetchAsyncMovies(term));
     dispatch(fetchAsyncShows(term));
+    navigate('/');
     setTerm('');
   }
 

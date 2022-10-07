@@ -21,3 +21,25 @@
   width: 38px;
   height: 38px;
 }
+
+.search-box{
+  input{
+    min-width: 400px;
+    padding: 5px 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+  }
+  button{
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.2s;
+
+    &:hover{
+      color: white;
+      background-color: black;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+  }
+
+}
