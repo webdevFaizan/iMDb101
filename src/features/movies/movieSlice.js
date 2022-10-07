@@ -7,8 +7,8 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',  //This is the naming convention for identifying the async action creator, movies comes from the createSlice method and /fetchAsyncMovies is the name of the current function.
-    async ()=>{     //The second parameter is the payload creator async function.
-        const searchTerm = 'Justice League';
+    async (searchTerm)=>{     //The second parameter is the payload creator async function.
+        // const searchTerm = 'Justice League';
         const type = 'movie';
         const response = await movieApi
         .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
@@ -19,8 +19,8 @@ export const fetchAsyncMovies = createAsyncThunk(
 
 export const fetchAsyncShows = createAsyncThunk(
     'movies/fetchAsyncShows',  
-    async ()=>{     //The second parameter is the payload creator async function.
-        const searchTerm = 'Friends';
+    async (searchTerm)=>{     //The second parameter is the payload creator async function.
+        // const searchTerm = 'Friends';
         const type = 'series';
         const response = await movieApi
         .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
@@ -100,7 +100,7 @@ const movieSlice = createSlice({
 
 export const {removeSelectedMovieOrShow} = movieSlice.actions;
 // We have state.movies..... here the movies represent the name of the Slice. We could have given any different name as per our requirement, but this suited best.
-export const getAllMovies = (state) =>{console.log(state.movies.movies); return state.movies.movies};
+export const getAllMovies = (state) =>{return state.movies.movies};
 export const getAllSeries = (state) =>{return state.movies.series};
 export const getSelectedMovieOrShow = (state) => state.movies.selectMovieOrShow;
 export default movieSlice.reducer;

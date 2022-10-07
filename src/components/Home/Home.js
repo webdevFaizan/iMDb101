@@ -43,8 +43,9 @@ export default function Home(){
 
 // Method 3 - Calling the useEffect() method using asyncThunk
   useEffect(() => {
-    dispatch(fetchAsyncMovies());   //Asynchronous action-creator will call the data asynchronously.
-    dispatch(fetchAsyncShows());   //Asynchronous action-creator will call the data asynchronously.
+    const searchTerm = 'Justice League'
+    dispatch(fetchAsyncMovies(searchTerm));   //Asynchronous action-creator will call the data asynchronously.
+    dispatch(fetchAsyncShows('Friends'));   //Asynchronous action-creator will call the data asynchronously.
   }, [dispatch])
 
   return (

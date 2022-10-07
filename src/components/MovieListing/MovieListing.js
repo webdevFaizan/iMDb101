@@ -47,7 +47,7 @@ export default function MovieListing() {
   );
 
   // const responsive = {}
-  console.log(movies);
+  // console.log(movies);
   return (
     <div className="movie-wrapper">
       <div className="movie-list">
