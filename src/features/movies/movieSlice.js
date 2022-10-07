@@ -65,6 +65,10 @@ const movieSlice = createSlice({
         removeSelectedMovieOrShow : (state)=>{
             // state.movies = state.movies;
             state.selectMovieOrShow={};     //This is the inbuilt functionality of the redux toolkit that I am able to change the state of the variable in a mutable manner, this however is not possible in the case of normal react redux.
+        },
+        removeAllMovieAndShows : (state) =>{
+            state.movies={};
+            state.series={};
         }
 
     },
@@ -72,33 +76,33 @@ const movieSlice = createSlice({
     // There is an another optional parameter in here, known as the extra reducer, we can read the docs or visit the dipesh malvia video to understand about the extra reudcer. In our project we do not require the use of extra reducer.
     extraReducers : {    //IMPORTANT : This extraReducers method will have the lifecycle methods of the async action creator, which simply means that in an async life cycle, when the state of the action-creator is in pending state, it will be added here, when it is in the fulfilled state it will be added here and so on.
         [fetchAsyncMovies.pending] : ()=>{
-            console.log('pending');
+            // console.log('pending');
         },
         [fetchAsyncMovies.fulfilled] : (state, {payload})=>{
-            console.log("Fulfilled");
+            // console.log("Fulfilled");
             return {...state, movies : payload};    //This is the traditional way of updating the state of the store, which also shows that the state of the store is still immutable, only in the reducer : {} object, this was kept mutable that too through handling internally but redux.
         },
         [fetchAsyncMovies.rejected] : ()=>{
-            console.log('rejected');
+            // console.log('rejected');
         },
         [fetchAsyncShows.pending] : ()=>{
-            console.log('pending');
+            // console.log('pending');
         },
         [fetchAsyncShows.fulfilled] : (state, {payload})=>{
-            console.log("Fulfilled");
+            // console.log("Fulfilled");
             return {...state, series : payload};    //This is the traditional way of updating the state of the store, which also shows that the state of the store is still immutable, only in the reducer : {} object, this was kept mutable that too through handling internally but redux.
         },
         [fetchAsyncShows.rejected] : ()=>{
-            console.log('rejected');
+            // console.log('rejected');
         },
         [fetchAsyncMovieOrShowDetail.fulfilled] : (state, {payload})=>{
-            console.log("Fulfilled");
+            // console.log("Fulfilled");
             return {...state, selectMovieOrShow : payload};
         }
     }
 });
 
-export const {removeSelectedMovieOrShow} = movieSlice.actions;
+export const {removeSelectedMovieOrShow,removeAllMovieAndShows} = movieSlice.actions;
 // We have state.movies..... here the movies represent the name of the Slice. We could have given any different name as per our requirement, but this suited best.
 export const getAllMovies = (state) =>{return state.movies.movies};
 export const getAllSeries = (state) =>{return state.movies.series};

@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import MovieListing from '../MovieListing/MovieListing';
 
 import { useDispatch } from 'react-redux';
-import { fetchAsyncMovies,fetchAsyncShows } from '../../features/movies/movieSlice';
+import { fetchAsyncMovies,fetchAsyncShows,removeAllMovieAndShows } from '../../features/movies/movieSlice';
 
-export default function Home(){
+export default function Home(props){
 
   const dispatch = useDispatch();
 
@@ -43,9 +43,16 @@ export default function Home(){
 
 // Method 3 - Calling the useEffect() method using asyncThunk
   useEffect(() => {
-    const searchTerm = 'Justice League'
+    var searchTerm = props.term;
+    if(!searchTerm){
+      searchTerm = 'Harry'
+    }
+    console.log(props.term)
     dispatch(fetchAsyncMovies(searchTerm));   //Asynchronous action-creator will call the data asynchronously.
     dispatch(fetchAsyncShows('Friends'));   //Asynchronous action-creator will call the data asynchronously.
+    return()=>{
+      dispatch(removeAllMovieAndShows());
+    }
   }, [dispatch])
 
   return (

@@ -5,25 +5,30 @@ import { fetchAsyncMovies, fetchAsyncShows } from "../../features/movies/movieSl
 import user from "../../images/user.png";
 import "./Header.scss";
 
-const Header = () => {
+const Header = (props) => {
 
-  const [term,setTerm] = useState("");
+  // const [term,setTerm] = useState("");
+  var {term, termChangeHandler} = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOnChange = (e)=>{
     // console.log(e);
-    setTerm(e.target.value);
+    termChangeHandler(e.target.value);
     // console.log(term);
   }
   
   const onSubmitHandler = (e)=>{
     e.preventDefault();
-    console.log(term);
+    console.log("Inside the box "+term);
+    if(term===''){
+      alert("Please enter a search term first.");
+      return;
+    }
     dispatch(fetchAsyncMovies(term));
     dispatch(fetchAsyncShows(term));
     navigate('/');
-    setTerm('');
+    // termChangeHandler('');
   }
 
   return (
