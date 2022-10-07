@@ -47,13 +47,15 @@ export default function Home(props){
     if(!searchTerm){
       searchTerm = 'Harry'
     }
-    console.log(props.term)
+    // console.log(props.term)
+    //IMPORTANT : The search term is being defined as props.term which simply means that if I click on the back button in the navation bar of the browser, when the website comes from the movieDetail page to the home page, the term will still remain the same as old one, which means if I went to the batman movie detail page, and then searched for harry potter, now if I click back button, I will go to harry not batman page. This is becasue the global state of term variable is still the same as 'harry' no matter how many times I click back. This is why I think the navigation should not be taken in such a manner using react, it should have been done by some other way.
     dispatch(fetchAsyncMovies(searchTerm));   //Asynchronous action-creator will call the data asynchronously.
-    dispatch(fetchAsyncShows('Friends'));   //Asynchronous action-creator will call the data asynchronously.
+    dispatch(fetchAsyncShows(searchTerm));   //Asynchronous action-creator will call the data asynchronously.
     return()=>{
-      dispatch(removeAllMovieAndShows());
+      dispatch(removeAllMovieAndShows());   //This delete function is added so that we could easily add the loading bar in the page when new movies are being loaded.
     }
-  }, [dispatch])
+  }, [dispatch,props.term])
+  // IMPORTANT : I am now tracking the props.term variable, which means when the value of the props.term variable changes in the search bar, there will be an api call. But this has been handled using the debouncing in the useEffect hook of the Header component, only after a certain time there will be an api call.
 
   return (
     <div>
