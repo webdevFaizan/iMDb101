@@ -5,6 +5,8 @@
   margin: 20px 0px;
   h2 {
     color: $font-secondary;
+    // align-items: center;
+    text-align: center;
     margin-bottom: 10px;
     font-weight: 400;
   }
@@ -26,5 +28,10 @@
 }
 
 .movie-inner-container {
-  max-width: 1200px;
+  max-width: 800px;
+}
+
+.extra-component{
+  // color: red;
+  visibility: hidden;
 }

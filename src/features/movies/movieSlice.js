@@ -8,7 +8,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAsyncMovies = createAsyncThunk(
     'movies/fetchAsyncMovies',  //This is the naming convention for identifying the async action creator, movies comes from the createSlice method and /fetchAsyncMovies is the name of the current function.
     async ()=>{     //The second parameter is the payload creator async function.
-        const searchTerm = 'Batman';
+        const searchTerm = 'Justice League';
         const type = 'movie';
         const response = await movieApi
         .get(`?apikey=${APIkey}&type=${type}&s=${searchTerm}`)
@@ -63,6 +63,7 @@ const movieSlice = createSlice({
             // IMPORTANT : Here there is a difference between the redux and the redux toolkit, in the redux the reudcers could not directly assign the values to the state object as it was immutable, but in redux toolkit the values of the state is mutable, which means we could easily replace the values inside the state. In the reudx toolkit, it uses an internal library to maintain the mutability. In the old redux way we had to destructure the old state object and add the new payload to the object before returning.
         },
         removeSelectedMovieOrShow : (state)=>{
+            // state.movies = state.movies;
             state.selectMovieOrShow={};     //This is the inbuilt functionality of the redux toolkit that I am able to change the state of the variable in a mutable manner, this however is not possible in the case of normal react redux.
         }
 
@@ -97,9 +98,9 @@ const movieSlice = createSlice({
     }
 });
 
-export const {addMovies,removeSelectedMovieOrShow} = movieSlice.actions;
+export const {removeSelectedMovieOrShow} = movieSlice.actions;
 // We have state.movies..... here the movies represent the name of the Slice. We could have given any different name as per our requirement, but this suited best.
-export const getAllMovies = (state) =>{return state.movies.movies};
+export const getAllMovies = (state) =>{console.log(state.movies.movies); return state.movies.movies};
 export const getAllSeries = (state) =>{return state.movies.series};
 export const getSelectedMovieOrShow = (state) => state.movies.selectMovieOrShow;
 export default movieSlice.reducer;
